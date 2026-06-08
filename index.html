@@ -1,40 +1,748 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-		<title>reveal.js</title>
+  <title>Fractures & Co-Production of Geothermal Energy and Lithium</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+  <link rel="stylesheet" href="dist/reset.css" />
+  <link rel="stylesheet" href="dist/reveal.css" />
+  <link rel="stylesheet" href="dist/theme/white.css" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <!-- Code highlighting (optional) -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" />
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+  <style>
+    :root {
+      --r-heading-text-transform: none;
+      --r-main-color: #2b2b2b;
+      --r-heading-color: #1b3a57;
+      --r-link-color: #c0532a;
+      --r-link-color-hover: #e06d3e;
+      --r-selection-background-color: #f5cfae;
+    }
+    .reveal-viewport {
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(255, 233, 200, 0.9), transparent 60%),
+        radial-gradient(900px 700px at 90% 20%, rgba(200, 230, 255, 0.8), transparent 55%),
+        linear-gradient(160deg, #f7f1e4 0%, #f2e7d9 45%, #e9f0f7 100%);
+    }
+    .reveal {
+      color: var(--r-main-color);
+      font-size: 32px;
+    }
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal h4 {
+      color: var(--r-heading-color);
+      text-shadow: 0 2px 0 rgba(255,255,255,0.6);
+      margin-top: 0;
+    }
+    .reveal .slides section {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .small { font-size: 0.72em; line-height: 1.25em; }
+    .tiny  { font-size: 0.62em; line-height: 1.2em; }
+    .eq { font-size: 1.05em; }
+    .boxed {
+      border: 1px solid rgba(27, 58, 87, 0.18);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 8px 20px rgba(23, 54, 82, 0.08);
+    }
+    .cols { display: flex; gap: 18px; align-items: stretch; }
+    .col  { flex: 1; }
+    .imgph {
+      width: 100%;
+      height: 340px;
+      border: 2px dashed rgba(192, 83, 42, 0.45);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(39, 52, 66, 0.8);
+      background: rgba(255, 255, 255, 0.7);
+    }
+    .caption { font-size: 0.58em; opacity: 0.85; margin-top: 8px; }
+    .emph { color: #c0532a; }
+    .note { font-size: 0.62em; opacity: 0.9; }
+    .tight li { margin: 0.18em 0; }
+    .foot { position: absolute; left: 18px; bottom: 12px; font-size: 0.52em; opacity: 0.7; }
+    .reveal {
+      font-family: "Alegreya", "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+    }
+  </style>
+</head>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- =========================================================
+         TITLE / CONTEXT
+    ========================================================== -->
+
+    <section>
+      <h2>Fracture networks in geothermal <span class="emph">energy + lithium</span> co-production</h2>
+      <p class="small">
+        Simulation study: mixed-dimensional flow/transport/heat in fractured porous media
+      </p>
+      <div class="boxed small" style="font-size:0.9em; line-height:1.2; padding:10px 12px;">
+        <div><b>Reference:</b> Banshoya, Berre, Keilegavlen (2025), <i>Geothermal Energy</i>.</div>
+        <div><b>Date:</b> 15 January 2026.</div>
+        <div><b>Course:</b> Numerical methods for the geoscience.</div>
+      </div>
+      <div class="foot">Tip: press <b>S</b> for speaker notes if enabled.</div>
+    </section>
+
+    <!-- =========================================================
+         WEB IMAGES (YOU CAN REPLACE)
+    ========================================================== -->
+
+    <section>
+      <h3>Visual context I: lithium demand outlook (example figure)</h3>
+      <div class="cols">
+        <div class="col">
+          <!-- Remote image; if it doesn't load (CORS/offline), replace with a local file -->
+          <img
+            src="https://sprott.com/media/o0shtpkd/fig1-lithium-supply.png"
+            alt="Lithium demand outlook figure"
+            style="width:100%; border-radius:14px;"
+          />
+          <div class="caption">
+            Example demand/supply-style chart.
+          </div>
+        </div>
+        <div class="col">
+          <div class="boxed small">
+            <b>Key takeaways:</b>
+            <ul class="tight">
+              <li>Demand growth is steep across most scenarios.</li>
+              <li>Supply expansion must be fast and diversified.</li>
+              <li>Geothermal brines become a strategic add-on.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>What is geothermal energy?</h3>
+      <div class="cols">
+        <div class="col">
+          <img
+            src="assets/images/exchanger.gif"
+            alt="Heat exchanger"
+            style="width:100%; height:340px; object-fit:cover; border-radius:14px;"
+          />
+          <div class="caption">Heat exchanger.</div>
+        </div>
+        <div class="col">
+          <div class="boxed small">
+            <ul class="tight">
+              <li>Heat stored in the subsurface is brought up by circulating fluids.</li>
+              <li>Produced hot brine drives power/heat generation at the surface.</li>
+              <li>Cooled fluid is re-injected to sustain pressure and heat extraction.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>How geothermal lithium co-production works</h3>
+      <div class="cols">
+        <div class="col">
+          <img
+            src="https://www.thinkgeoenergy.com/wp-content/uploads/2021/12/2021_geothermal-lithium_v4.jpeg"
+            alt="Geothermal lithium co-production system schematic"
+            style="width:100%; height:260px; object-fit:cover; border-radius:14px;"
+          />
+          <div class="caption">Source: EuroGeologists (2017).</div>
+        </div>
+        <div class="col">
+          <div class="boxed small" style="font-size:0.9em;">
+            <div><b>Lithium‑rich regions where co‑production is promising:</b></div>
+            <ul class="tight">
+              <li>Upper Rhine Graben, France (Soultz-sous-Forets).</li>
+              <li>Salton Sea geothermal field, USA (California).</li>
+              <li>Andean Altiplano, Chile/Argentina/Bolivia.</li>
+              <li>Qinghai-Tibet Plateau, China.</li>
+              <li>Great Rift Valley, East Africa (Kenya, Ethiopia).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Lithium extraction pathways</h3>
+      <div class="cols">
+        <div class="col">
+          <img
+            src="assets/images/ponds.jpg"
+            alt="Evaporation ponds at Salar de Atacama"
+            style="width:100%; border-radius:14px; height:170px; object-fit:cover;"
+          />
+          <div class="caption">Brine evaporation ponds.</div>
+          <ul class="tight small">
+            <li>Low process energy, very slow (months–years).</li>
+            <li>Large land + water footprint, climate-dependent.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <img
+            src="assets/images/hardrock.jpeg"
+            alt="Hard-rock open pit lithium mine"
+            style="width:100%; border-radius:14px; height:170px; object-fit:cover;"
+          />
+          <div class="caption">Hard-rock mining + refining.</div>
+          <ul class="tight small">
+            <li>Faster supply, high energy intensity.</li>
+            <li>Tailings, CO₂, and transport impacts.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <img
+            src="assets/images/geothermalplant.jpeg"
+            alt="Geothermal plant suitable for direct lithium extraction"
+            style="width:100%; border-radius:14px; height:170px; object-fit:cover;"
+          />
+          <div class="caption">Direct lithium extraction (DLE).</div>
+          <ul class="tight small">
+            <li>Sorbents/solvents/membranes target Li.</li>
+            <li>Smaller footprint; fits geothermal brines.</li>
+            <li>Compatible with hot brines and reinjection loops.</li>
+            <li>Potentially faster recovery than evaporation.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Breakthrough: the core operational risk</h3>
+      <div class="cols">
+        <div class="col">
+          <div class="boxed small">
+            <ul class="tight">
+              <li><b>Chemical breakthrough:</b> Li-depleted injected fluid reaches the producer.</li>
+              <li><b>Thermal breakthrough:</b> cold injected fluid reduces produced temperature.</li>
+              <li>Heat conduction buffers temperature, so <span class="emph">Li decline usually starts earlier</span>.</li>
+            </ul>
+          </div>
+          <p class="note">Assumption: negligible Li leaching from rock.</p>
+        </div>
+        <div class="col">
+          <svg viewBox="0 0 260 170" width="100%" height="170" role="img" aria-label="Breakthrough schematic">
+            <rect x="0" y="0" width="260" height="170" rx="12" fill="#f6f0e4" stroke="#1b3a57" stroke-width="2"/>
+            <line x1="60" y1="30" x2="60" y2="150" stroke="#1b3a57" stroke-width="5"/>
+            <line x1="200" y1="30" x2="200" y2="150" stroke="#1b3a57" stroke-width="5"/>
+            <text x="60" y="20" text-anchor="middle" font-size="10" fill="#1b3a57">Injection</text>
+            <text x="200" y="20" text-anchor="middle" font-size="10" fill="#1b3a57">Production</text>
+            <path d="M60 70 C110 70, 150 70, 200 70" stroke="#c0532a" stroke-width="4" fill="none"/>
+            <path d="M60 110 C110 110, 150 110, 200 110" stroke="#2d7d46" stroke-width="4" fill="none" stroke-dasharray="6 4"/>
+            <text x="130" y="64" text-anchor="middle" font-size="10" fill="#c0532a">Li-depleted front</text>
+            <text x="130" y="124" text-anchor="middle" font-size="10" fill="#2d7d46">Cold front (slower)</text>
+          </svg>
+          <div class="caption">Chemical breakthrough often precedes thermal breakthrough.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         MODEL OVERVIEW
+    ========================================================== -->
+
+    <section>
+      <h3>Modeling strategy</h3>
+      <div class="boxed small">
+        <ul class="tight">
+          <li>Single-phase incompressible flow (Darcy) + mass conservation.</li>
+          <li>Transport of lithium concentration by <b>advection</b> (dispersion neglected).</li>
+          <li>Energy equation with <b>convection + conduction</b>, local thermal equilibrium.</li>
+          <li><b>Mixed-dimensional fractures:</b> fractures are lower-dimensional manifolds coupled to the matrix.</li>
+        </ul>
+      </div>
+      <p class="note">
+        Key hypothesis tested: fracture geometry impacts <span class="emph">lithium production more</span> than energy production.
+      </p>
+    </section>
+
+    <!-- =========================================================
+         MATRIX: FLOW
+    ========================================================== -->
+
+    <section>
+      <h3>Matrix flow: Darcy + mass conservation</h3>
+      <div class="boxed eq" style="font-size:0.9em;">
+        \[
+          \begin{aligned}
+            \mathbf{v} &= -\frac{K}{\eta}\nabla p &&\text{(Darcy flux)}\\
+            \nabla\cdot \mathbf{v} &= f_p &&\text{(mass cons)}
+          \end{aligned}
+        \]
+      </div>
+
+      <div class="boxed small" style="margin-top:10px; font-size:0.9em; padding:10px 12px;">
+        <b>Parameters (matrix):</b>
+        <ul class="tight">
+          <li>\(\mathbf{v}\): Darcy flux [m/s]</li>
+          <li>\(K\): matrix permeability [m\(^2\)]</li>
+          <li>\(\eta\): dynamic viscosity [Pa·s]</li>
+          <li>\(p\): pressure [Pa]</li>
+          <li>\(f_p\): volumetric source/sink per bulk volume [1/s] (wells)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3>Matrix flow source term \(f_p\) (as in the report)</h3>
+      <div class="boxed eq" style="font-size:0.9em;">
+        \[
+        f_p(\mathbf{x})=
+        \begin{cases}
+          q, & \text{injection point(s)}\\
+          -q, & \text{production point(s)}\\
+          0, & \text{elsewhere}
+        \end{cases}
+        \]
+      </div>
+
+      <div class="boxed small" style="margin-top:10px; font-size:0.9em; padding:10px 12px;">
+        <b>Flow rate values used in simulations:</b>
+        <ul class="tight">
+          <li><b>2D stochastic networks:</b> \(q = 0.4\ \mathrm{L/s}\) (paper notes: corresponds to ~\(40\ \mathrm{L/s}\) for 100 m thickness).</li>
+          <li><b>3D networks:</b> \(q = 30\ \mathrm{L/s}\).</li>
+          <li>Boundary pressure: \(p=30\ \mathrm{MPa}\) prescribed on global boundary.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         MATRIX: CONCENTRATION
+    ========================================================== -->
+
+    <section>
+      <h3>Matrix lithium concentration (advection, no diffusion)</h3>
+      <div class="boxed eq" style="font-size:0.9em;">
+        \[
+          \partial_t(\phi\,c) + \nabla\cdot(c\,\mathbf{v}) = f_c
+        \]
+      </div>
+
+      <div class="boxed small" style="margin-top:10px; font-size:0.9em; padding:10px 12px;">
+        <div style="margin-bottom:6px;"><b>Parameters:</b></div>
+        <ul class="tight">
+          <li>\(\phi\): matrix porosity </li>
+          <li>\(c\): lithium concentration </li>
+          <li>\(\mathbf{v}\): Darcy flux from flow solve</li>
+          <li>\(f_c\): source/sink for concentration due to wells</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3>Concentration source term \(f_c\) (as in the report)</h3>
+      <div class="boxed eq">
+        \[
+        f_c(\mathbf{x})=
+        \begin{cases}
+          c_{\mathrm{in}}\,q, & \text{injection point}\\
+          -c\,q, & \text{production point}\\
+          0, & \text{elsewhere}
+        \end{cases}
+        \]
+      </div>
+
+      <div class="boxed small" style="margin-top:10px; font-size:0.85em; padding:10px 12px;">
+        <b>Injected/initial values used in simulations:</b>
+        <ul class="tight">
+          <li>Initial reservoir concentration: \(c_0 = 170\ \mathrm{mg/L}\).</li>
+          <li>Injected concentration: \(c_{\mathrm{in}} = 0\ \mathrm{mg/L}\) (Li-depleted reinjection).</li>
+          <li>Interpretation: production term \(-c q\) removes the <i>current</i> produced concentration.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         MATRIX: ENERGY
+    ========================================================== -->
+
+    <section>
+      <h3>Matrix energy (local thermal equilibrium)</h3>
+      <div class="boxed eq" style="font-size:0.78em;">
+        \[
+          \partial_t\!\big((\rho b)_m\,T\big)
+          + \nabla\cdot\!\big((\rho b)_f\,T\,\mathbf{v} - \kappa_m\nabla T\big)
+          = f_T
+        \]
+      </div>
+
+      <div class="boxed small" style="margin-top:10px; font-size:0.9em; padding:10px 12px;">
+        <b>Effective properties:</b>
+        <ul class="tight">
+          <li>\((\rho b)_m = \phi(\rho b)_f + (1-\phi)(\rho b)_s\) (mixture heat capacity)</li>
+          <li>\(\kappa_m = \phi \kappa_f + (1-\phi)\kappa_s\) (mixture conductivity)</li>
+          <li>Subscripts \(f\)=fluid, \(s\)=solid rock</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3>Energy source term \(f_T\) (as in the report)</h3>
+      <div class="boxed eq" style="font-size:0.9em;">
+        \[
+        f_T(\mathbf{x})=
+        \begin{cases}
+          (\rho b)_f\,T_{\mathrm{in}}\,q, & \text{injection point}\\
+          -(\rho b)_f\,T\,q, & \text{production point}\\
+          0, & \text{elsewhere}
+        \end{cases}
+        \]
+      </div>
+
+      <div class="boxed small" style="margin-top:10px; font-size:0.9em; padding:10px 12px;">
+        <b>Injected/initial values used in simulations:</b>
+        <ul class="tight">
+          <li>Initial reservoir temperature: \(T_0 = 160^{\circ}\mathrm{C}\).</li>
+          <li>Injected temperature: \(T_{\mathrm{in}} = 70^{\circ}\mathrm{C}\).</li>
+          <li>Interpretation: produced enthalpy term uses the <i>current</i> \(T\) at the production point.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         FRACTURES: THE 3 REQUESTED SLIDES (DARcy / c / energy)
+         "Specify every parameter" — done explicitly.
+    ========================================================== -->
+
+    <section>
+      <h3>Fractures I — Darcy flow (lower-dimensional)</h3>
+      <div class="boxed eq" style="font-size:0.75em;">
+        \[
+          \begin{aligned}
+            \mathbf{v}_l &= -\varepsilon_l\,\frac{K_l}{\eta_l}\,\nabla p_l \\
+            \nabla\cdot \mathbf{v}_l &= \varepsilon_l f_p + \big(\,v^{+} + v^{-}\,\big)\big|_{\Omega_l} \\
+            K_l &= \frac{\varepsilon_l^2}{12} \qquad\text{(cubic law)}
+          \end{aligned}
+        \]
+      </div>
+
+      <div class="boxed small" style="margin-top:6px; font-size:0.62em; line-height:1.12; padding:6px 8px;">
+        
+        <ul class="tight">
+          <li>\(\Omega_l\): fracture domain (dimension \(d-1\))</li>
+          <li>\(\mathbf{v}_l\): tangential Darcy flux in fracture [m/s in tangential coordinates]</li>
+          <li>\(p_l\): fracture pressure [Pa]</li>
+          <li>\(\varepsilon_l\): fracture aperture [m] (paper uses \(5\times10^{-3}\) m)</li>
+          <li>\(K_l\): fracture permeability [m\(^2\)], via cubic law</li>
+          <li>\(\eta_l\): viscosity in fracture [Pa·s] (typically same as matrix fluid, \(10^{-3}\))</li>
+          <li>\(\nabla\): tangential gradient along fracture</li>
+          <li>\(f_p\): same well source term as matrix (scaled by \(\varepsilon_l\) in fracture balance)</li>
+          <li>\(v^{+}, v^{-}\): interface (normal) fluxes matrix→fracture on each side</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3>Fractures I — flow coupling (matrix ↔ fracture)</h3>
+      <div class="boxed small">
+        <b>Interface law (Darcy-type):</b>
+        \[
+          v_j = -\frac{2K_l|_{\Gamma^j}}{(\eta\varepsilon)_l|_{\Gamma^j}}\big(p_l|_{\Gamma^j}-p_h|_{\Gamma^j}\big),
+          \quad j\in\{+,-\}
+        \]
+        <b>Matrix internal boundary condition:</b>
+        \[
+          (\nu_h\cdot \mathbf{v}_h)|_{\partial^j\Omega_h} = v_j|_{\partial^j\Omega_h}.
+        \]
+        <div class="note">Here \(\nu_h\) is the matrix outward unit normal on the internal boundary \(\partial^j\Omega_h\).</div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Fractures II — concentration transport (equation)</h3>
+      <div class="boxed eq">
+        \[
+          \partial_t\!\big(\varepsilon_l \phi_l c_l\big)
+          + \nabla\cdot\!\big(c_l \mathbf{v}_l\big)
+          = \varepsilon_l f_c + \big(\zeta^{+} + \zeta^{-}\big)\big|_{\Omega_l}
+        \]
+      </div>
+
+      <div class="boxed small" style="margin-top:10px;">
+        <b>All parameters / symbols (fracture concentration):</b>
+        <ul class="tight">
+          <li>\(\phi_l\): fracture porosity</li>
+          <li>\(c_l\): fracture lithium concentration</li>
+          <li>\(\mathbf{v}_l\): fracture tangential flux (from fracture Darcy solve)</li>
+          <li>\(f_c\): well source term (same structure as matrix), scaled by \(\varepsilon_l\)</li>
+          <li>\(\zeta^{+},\zeta^{-}\): advective interface solute fluxes (matrix↔fracture exchange)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3>Fractures II — upwind exchange details</h3>
+      <div class="boxed small">
+        <b>Interface flux (upwind):</b>
+        \[
+          \zeta_j =
+          \begin{cases}
+            v_j\,c_h|_{\Gamma^j}, & v_j \ge 0 \quad (\text{matrix}\to\text{fracture})\\
+            v_j\,c_l|_{\Gamma^j}, & v_j < 0 \quad (\text{fracture}\to\text{matrix})
+          \end{cases}
+        \]
+        <b>Matrix internal boundary condition:</b>
+        \[
+          (\nu_h\cdot c_h\mathbf{v}_h)|_{\partial^j\Omega_h} = \zeta_j|_{\partial^j\Omega_h}.
+        \]
+        <div class="note">Interpretation: sign of \(v_j\) selects upstream concentration.</div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Fractures III — energy equation</h3>
+      <div class="boxed eq" style="font-size:0.52em;">
+        \[
+        \partial_t\!\big(\varepsilon_l (\rho b)_{m,l} T_l\big)
+        + \nabla\cdot\!\big((\rho b)_{f,l} T_l \mathbf{v}_l - \varepsilon_l \kappa_{m,l}\nabla T_l\big)
+        = \varepsilon_l f_T + \{(w^{+}+q^{+})+(w^{-}+q^{-})\}\big|_{\Omega_l}
+        \]
+      </div>
+
+      <div class="boxed small" style="margin-top:14px;">
+        <b>All parameters / symbols (fracture energy):</b>
+        <ul class="tight">
+          <li>\(T_l\): fracture temperature</li>
+          <li>\((\rho b)_{m,l} = \phi_l(\rho b)_{f,l} + (1-\phi_l)(\rho b)_{s,l}\): effective fracture heat capacity</li>
+          <li>\(\kappa_{m,l} = \phi_l\kappa_{f,l} + (1-\phi_l)\kappa_{s,l}\): effective fracture conductivity</li>
+          <li>\((\rho b)_{f,l}\): fluid volumetric heat capacity in fracture</li>
+          <li>\(f_T\): well energy source term (same structure as matrix), scaled by \(\varepsilon_l\)</li>
+          <li>\(w^{\pm}\): convective interface energy flux (upwinded)</li>
+          <li>\(q^{\pm}\): conductive interface heat flux </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3>Fractures III — energy exchange (interfaces)</h3>
+      <div class="boxed tiny">
+        <b>Interface fluxes:</b><br/>
+        Convective (upwind) energy exchange:
+        \[
+          w_j =
+          \begin{cases}
+            v_j\big((\rho b)_{f,h}T_h\big)|_{\Gamma^j}, & v_j \ge 0\\
+            v_j\big((\rho b)_{f,l}T_l\big)|_{\Gamma^j}, & v_j < 0
+          \end{cases}
+        \]
+        Conductive exchange across fracture aperture:
+        \[
+          q_j = -\frac{2\kappa_{f,l}|_{\Gamma^j}}{\varepsilon_l|_{\Omega_l}}\big(T_l|_{\Gamma^j}-T_h|_{\Gamma^j}\big)
+        \]
+        Matrix internal boundary conditions:
+        \[
+          (\nu_h\cdot (\rho b)_{f,h}T_h\mathbf{v}_h)|_{\partial^j\Omega_h} = w_j,\qquad
+          (\nu_h\cdot (-\kappa_{m,h}\nabla T_h))|_{\partial^j\Omega_h} = q_j.
+        \]
+      </div>
+    </section>
+
+    <!-- =========================================================
+         NUMERICS
+    ========================================================== -->
+
+    <section>
+      <h3>Numerical approach (discretization & solve)</h3>
+      <div class="boxed small">
+        <ul class="tight">
+          <li>Flow solved once (constant flow field for chosen \(q\) and boundary conditions).</li>
+          <li>Time loop solves: concentration + temperature in matrix and fractures, with coupling terms.</li>
+          <li>Mesh conforms to fractures (Gmsh backend), mixed-dimensional grids.</li>
+          <li>Spatial discretization: finite volume
+            <ul class="tight">
+              <li>TPFA for elliptic terms (pressure, conduction)</li>
+              <li>First-order upwind for advection (in subdomains and across interfaces)</li>
+            </ul>
+          </li>
+          <li>Time discretization: implicit Euler.</li>
+          <li>Linear solver: PyPardiso.</li>
+        </ul>
+      </div>
+      <p class="note">Implementation framework: PorePy (open-source).</p>
+    </section>
+
+    <!-- =========================================================
+         SIMULATION SETUPS (2D and 3D)
+    ========================================================== -->
+
+    <section>
+      <h3>2D stochastic fracture networks — setup</h3>
+      <div class="boxed small">
+        <ul class="tight">
+          <li>Domain: \(\Omega = [0,3]\ \mathrm{km}\times[0,2]\ \mathrm{km}\)</li>
+          <li>Wells: injection at \((1,1)\ \mathrm{km}\), production at \((2,1)\ \mathrm{km}\)</li>
+          <li>Fracture centers: \(x_c\sim U([0,3000])\), \(y_c\sim U([0,2000])\) (meters)</li>
+          <li>Fracture length: lognormal (mean 500 m, std 200 m)</li>
+          <li>Orientation: uniform \(U[-\pi/2,\pi/2]\)</li>
+          <li>Fracture counts: 8, 30, 82 (density proxy)</li>
+          <li>IC: \(T_0=160^\circ\mathrm{C}\), \(c_0=170\ \mathrm{mg/L}\)</li>
+          <li>Injection: \(T_{in}=70^\circ\mathrm{C}\), \(c_{in}=0\ \mathrm{mg/L}\)</li>
+          <li>\(q=0.4\ \mathrm{L/s}\), \(\Delta t=1.5\) years</li>
+          <li>Boundary: \(p=30\ \mathrm{MPa}\)</li>
+        </ul>
+      </div>
+      <img
+        src="assets/images/schemafratture.png"
+        alt="Sample fracture networks (8 / 30 / 82)"
+        style="width:100%; height:220px; object-fit:contain; margin-top:12px; border-radius:14px;"
+      />
+    </section>
+
+    <!-- =========================================================
+         RESULTS PLACEHOLDERS (YOU WILL ADD SCREENSHOTS)
+    ========================================================== -->
+
+    <section>
+      <h3>Results (2D): spatial fields</h3>
+      <div class="cols">
+        <div class="col">
+          <img
+            src="assets/images/R1.png"
+            alt="R1 fracture network spatial fields"
+            style="width:100%; height:260px; object-fit:contain; border-radius:14px;"
+          />
+          <div class="caption"><b>R1:</b> pathways steer flow away from the producer → delayed breakthrough.</div>
+        </div>
+        <div class="col">
+          <img
+            src="assets/images/R2.png"
+            alt="R2 fracture network spatial fields"
+            style="width:100%; height:260px; object-fit:contain; border-radius:14px;"
+          />
+          <div class="caption"><b>R2:</b> connected path between wells → early short‑circuiting.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Results (2D): production curves</h3>
+      <img
+        src="assets/images/R1R2.png"
+        alt="Production curves comparison for R1 and R2"
+        style="width:100%; height:360px; object-fit:contain; border-radius:14px;"
+      />
+      <div class="boxed small" style="margin-top:12px;">
+        chemical breakthrough (Li) occurs earlier than thermal breakthrough, and fracture geometry can drastically accelerate Li decline.
+      </div>
+    </section>
+
+    <section>
+      <h3>Cumulative production metrics</h3>
+      <div class="boxed eq" style="font-size:0.85em; padding:4px 8px;">
+        \[
+          W_c = \int_0^{60} c\,q\,dt, \qquad
+          W_T = \int_0^{60} T\,\rho_f b_f\,q\,dt
+        \]
+      </div>
+      <img
+        src="assets/images/arancionecumulata.png"
+        alt="Cumulative production histograms for Wc and WT"
+        style="width:100%; height:520px; object-fit:contain; margin-top:6px; border-radius:14px;"
+      />
+    </section>
+
+    <section>
+      <h3 style="margin-top:0;">Monte Carlo: 2D model validation</h3>
+      <img
+        src="assets/images/MC.png"
+        alt="P50 curve from 300 reshuffles"
+        style="width:100%; height:420px; object-fit:contain; border-radius:14px;"
+      />
+      <div class="boxed tiny" style="margin-top:12px;">
+        P50 stabilizes after 300 reshuffles, indicating robust central tendency.
+      </div>
+    </section>
+
+    <section>
+      <h3>3D fracture networks — connectivity test</h3>
+      <div class="boxed small">
+        <ul class="tight">
+          <li>Inspired by Soultz-sous-Forêts style networks.</li>
+          <li>Domain: \(\Omega=[-4,2]\times[-3,3]\times[0,8]\) km</li>
+          <li>N1: 39 fractures, <b>not connected</b> between wells.</li>
+          <li>N2: add one fracture to connect components → <b>short-circuit</b> pathway possible.</li>
+          <li>IC/Injection same as 2D.</li>
+          <li>\(q=30\ \mathrm{L/s}\), \(\Delta t=1\) year, boundary \(p=30\ \mathrm{MPa}\).</li>
+        </ul>
+      </div>
+      <img
+        src="assets/images/N1N2.png"
+        alt="Fracture network connectivity schematic (N1 vs N2)"
+        style="width:100%; height:240px; object-fit:contain; margin-top:12px; border-radius:14px;"
+      />
+    </section>
+
+    <section>
+      <h3>Results (3D): connectivity effect</h3>
+      <img
+        src="assets/images/3dtime.png"
+        alt="3D concentration evolution over time (N1 vs N2)"
+        style="width:100%; height:420px; object-fit:contain; border-radius:14px;"
+      />
+    </section>
+
+    <section>
+      <h3>Conclusions</h3>
+      <div style="display:grid; grid-template-columns:0.9fr 1.1fr; gap:16px; align-items:stretch;">
+        <div style="background:#0b4f6c; color:#f7efe2; padding:22px; border-radius:18px; position:relative; overflow:hidden; min-height:240px;">
+          <div style="position:absolute; right:-40px; top:-40px; width:140px; height:140px; background:#f39c12; opacity:0.28; transform:rotate(20deg);"></div>
+          <div class="note" style="margin-bottom:8px; letter-spacing:0.08em; text-transform:uppercase; color:#ffd27a;">Final message</div>
+          <div style="font-size:1.5em; font-weight:700; line-height:1.2;">Fracture connectivity dominates lithium outcomes.</div>
+          <div style="margin-top:12px; font-size:0.95em; line-height:1.5;">Energy output stays more stable thanks to thermal diffusion and reinjection.</div>
+        </div>
+        <div style="background:#f39c12; color:#1b3a57; padding:22px; border-radius:18px; border:2px solid #1b3a57;">
+          <div class="note" style="margin-bottom:8px; letter-spacing:0.06em; text-transform:uppercase;">Key takeaways</div>
+          <ul class="tight" style="line-height:1.45; margin-bottom:0;">
+            <li>Lithium is highly sensitive to fracture connectivity; energy production is more robust due to diffusion.</li>
+            <li>Mixed-dimensional modeling represents fractures without 3D meshing, keeping costs stable and physics accurate.</li>
+            <li>The FV + upwind + implicit workflow is robust for advection-dominated transport and scales to Monte Carlo uncertainty.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Reveal.js -->
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/math/math.js"></script>
+
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: true,
+    center: true,
+    margin: 0.04,
+    plugins: [ RevealNotes, RevealHighlight, RevealMath.KaTeX ],
+
+    // KaTeX config (fast, good for exam rooms)
+    math: {
+      // KaTeX options can go here if needed
+    },
+
+    // Timing: you can tune this for 20 min pacing
+    transition: 'fade'
+  });
+</script>
+
+</body>
 </html>

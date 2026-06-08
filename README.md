@@ -1,30 +1,46 @@
-<p align="center">
-  <a href="https://revealjs.com">
-  <img src="https://hakim-static.s3.amazonaws.com/reveal-js/logo/v1/reveal-black-text-sticker.png" alt="reveal.js" width="500">
-  </a>
-  <br><br>
-  <a href="https://github.com/hakimel/reveal.js/actions"><img src="https://github.com/hakimel/reveal.js/workflows/tests/badge.svg"></a>
-  <a href="https://slides.com/"><img src="https://static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>
-</p>
+# Fracture Networks in Geothermal Energy & Lithium Co-Production
 
-reveal.js is an open source HTML presentation framework. It enables anyone with a web browser to create beautiful presentations for free. Check out the live demo at [revealjs.com](https://revealjs.com/).
+A reveal.js presentation analyzing the simulation study by **Banshoya, Berre & Keilegavlen (2025)** on the impact of fracture networks on geothermal energy and lithium co-production from subsurface brines.
 
-The framework comes with a powerful feature set including [nested slides](https://revealjs.com/vertical-slides/), [Markdown support](https://revealjs.com/markdown/), [Auto-Animate](https://revealjs.com/auto-animate/), [PDF export](https://revealjs.com/pdf-export/), [speaker notes](https://revealjs.com/speaker-view/), [LaTeX typesetting](https://revealjs.com/math/), [syntax highlighted code](https://revealjs.com/code/) and an [extensive API](https://revealjs.com/api/).
+Prepared for the course *Numerical Methods for the Geosciences* — January 2026.
 
----
+## Live presentation
 
-Want to create reveal.js presentation in a graphical editor? Try <https://slides.com>. It's made by the same people behind reveal.js.
+[View the slides on GitHub Pages](https://michelebaggi.github.io/geothermal-lithium-extraction/)
 
----
+> To enable GitHub Pages: go to **Settings → Pages → Source**, select branch `master`, folder `/ (root)`, and save.
 
-### Getting started
-- 🚀 [Install reveal.js](https://revealjs.com/installation)
-- 👀 [View the demo presentation](https://revealjs.com/demo)
-- 📖 [Read the documentation](https://revealjs.com/markup/)
-- 🖌 [Try the visual editor for reveal.js at Slides.com](https://slides.com/)
-- 🎬 [Watch the reveal.js video course (paid)](https://revealjs.com/course)
+## What this presentation covers
 
---- 
-<div align="center">
-  MIT licensed | Copyright © 2011-2024 Hakim El Hattab, https://hakim.se
-</div>
+The study models a geothermal doublet system (one injection well, one production well) in a fractured porous medium, tracking three coupled physical processes simultaneously:
+
+- **Flow** — single-phase Darcy flow through matrix and fractures
+- **Lithium transport** — advection of Li concentration (no diffusion)
+- **Heat transfer** — convection + conduction with local thermal equilibrium
+
+The key finding: **fracture connectivity dominates lithium recovery**, while energy output remains relatively stable thanks to thermal diffusion. A well-connected fracture pathway between wells causes early lithium breakthrough (short-circuiting), while a disconnected network buffers the Li front. Thermal breakthrough is always delayed relative to chemical breakthrough.
+
+The model uses a mixed-dimensional framework (PorePy) where fractures are represented as lower-dimensional manifolds coupled to the 3D/2D matrix — avoiding expensive 3D fracture meshing while preserving the physics.
+
+## Reference article
+
+> Banshoya, K., Berre, I., & Keilegavlen, E. (2025).
+> *A simulation study of the impact of fracture networks on geothermal energy and lithium co-production.*
+> **Geothermal Energy.**
+
+The full PDF is available in the [Releases](https://github.com/MicheleBaggi/geothermal-lithium-extraction/releases) section.
+
+## Running locally
+
+```bash
+npm install
+npm start
+```
+
+Then open `http://localhost:8000` in your browser.
+
+## Built with
+
+- [reveal.js](https://revealjs.com/) — HTML presentation framework
+- [KaTeX](https://katex.org/) — math rendering
+- [PorePy](https://github.com/pmgbergen/porepy) — mixed-dimensional simulation framework (used in the referenced study)
